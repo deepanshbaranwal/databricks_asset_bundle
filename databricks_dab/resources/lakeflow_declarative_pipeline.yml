@@ -1,0 +1,26 @@
+# The main pipeline for databricks_dab
+resources:
+  pipelines:
+    databricks_dab_etl:
+      id: f28f62fb-a8d9-4b44-add3-d9f6fb17da9c
+      pipeline_type: WORKSPACE
+      name: DLT_SLVR_Pipeline
+      configuration:
+        filename: customers
+      libraries:
+        - glob:
+            include: /Workspace/databricks_DAB/databricks_asset_bundle/databricks_dab/src/DLT_SLVR_Pipeline/transformations/**
+      schema: bronze_ecom
+      continuous: false
+      development: false
+      photon: true
+      channel: CURRENT
+      catalog: external_cat
+      serverless: true
+      root_path: /Workspace/databricks_DAB/databricks_asset_bundle/databricks_dab/src/DLT_SLVR_Pipeline
+
+      environment:
+        dependencies:
+          # We include every dependency defined by pyproject.toml by defining an editable environment
+          # that points to the folder where pyproject.toml is deployed.
+          - --editable ${workspace.file_path}
