@@ -2,8 +2,6 @@
 resources:
   pipelines:
     databricks_dab_etl:
-      id: f28f62fb-a8d9-4b44-add3-d9f6fb17da9c
-      pipeline_type: WORKSPACE
       name: DLT_SLVR_Pipeline
       configuration:
         filename: customers
